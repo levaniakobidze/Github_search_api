@@ -1,14 +1,12 @@
+import { useState } from "react";
 import "./App.css";
-import Navbar from "./Components/Navbar/Navbar";
 import Home from "./Pages/Home/Home";
-import SlideUp from "./Components/SlideUp/SlideUp";
 
 function App() {
+  const [dark, setDark] = useState(false);
   return (
     <div className='App'>
-      <Navbar />
-      <Home />
-      <SlideUp />
+      <Home dark={dark} setDark={setDark} />
     </div>
   );
 }

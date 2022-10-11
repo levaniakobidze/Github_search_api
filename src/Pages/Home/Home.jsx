@@ -1,20 +1,19 @@
 import React, { useState, useRef, useCallback, useEffect } from "react";
 import "./Home.css";
 import UserCard from "./userCard/UserCard";
-import { BsSearch } from "react-icons/bs";
+import searchIcon from "../../assets/searchIcon.svg";
+import sun from "../../assets/sun.svg";
+import moon from "../../assets/moon.svg";
 
-function Home() {
+function Home({ dark, setDark }) {
   /////////
   // STATES
-  const [users, setUsers] = useState([]);
+  const [user, setUser] = useState({});
   const [userExists, setUserExists] = useState(true);
-  const [loading, setLoading] = useState(false);
-  const [scroll, setScroll] = useState(false);
-  const inputRef = useRef(null);
+  const [inputValue, setInputValue] = useState("");
   ///////////////////////
   // FUNCTION TO FETCH THE DATA
   const fetchUsersData = async (URL) => {
-    setLoading(true);
     try {
       const response = await fetch(URL);
       const data = await response.json();
@@ -22,108 +21,73 @@ function Home() {
         setUserExists(false);
         return;
       }
-      setUsers(data.items);
-      setLoading(false);
-    } catch (error) {
-      console.log(error);
-    }
+      setUser(data);
+    } catch (error) {}
   };
-  console.log(loading);
   /////////////////////////////////////////////
   // USEEFFECT TO CATCH IF USER EXISTS OR NOT
   useEffect(() => {
-    if (users.length > 0) {
+    if (user) {
       setUserExists(true);
     }
-    if (users.length == 0) {
+    if (!user) {
       setUserExists(false);
     }
-  }, [users]);
+  }, [user]);
 
-  useEffect(() => {
-    if (inputRef.current.value === "") {
-      setUserExists(true);
-      return;
-    }
-  }, []);
   //////////////////////////////////////////////////////
-  // ONCHANGE FUNCTION WHICH FETCHES THE EXACT USER DATA
   const onChangeHandler = (value) => {
-    const url = `https://api.github.com/search/users?q=${value.replace(
-      /\s/g,
-      ""
-    )}`;
-    if (inputRef.current.value === "") {
-      setLoading(false);
-      setUserExists(true);
-      return;
-    }
+    setInputValue(value);
+  };
+
+  const serachHandler = () => {
+    const url = `https://api.github.com/users/${inputValue.replace(/\s/g, "")}`;
     fetchUsersData(url);
   };
-  /////////////////////////////////////////
-  // DEBOUNCE FUNCTION TO HAVE A FEW REQUEST
-  const debounce = (func) => {
-    let timer;
-    return function (...args) {
-      const context = this;
-      if (timer) clearTimeout(timer);
-      timer = setTimeout(() => {
-        timer = null;
-        func.apply(context, args);
-      }, 500);
-    };
-  };
-  /////////////////////////////////////////
-  // STYLEING FUNCTION
-  const scrollFunc = () => {
-    if (window.scrollY >= 10) {
-      setScroll(true);
-    } else {
-      setScroll(false);
-    }
-  };
-  window.addEventListener("scroll", scrollFunc);
 
-  const optimizedFn = useCallback(debounce(onChangeHandler), []);
+  const changeLightMode = () => {
+    setDark(() => !dark);
+  };
 
   return (
-    <div className='home' id='home'>
-      <form action='' onSubmit={(e) => e.preventDefault()}>
-        <div className={scroll ? "input-wrapper active" : "input-wrapper"}>
-          <div className='search-input-cont'>
-            <div className='style-div'>
-              <BsSearch className='search-icon' />
-            </div>
-            <input
-              type='search'
-              placeholder='Search users'
-              ref={inputRef}
-              onChange={(e) => optimizedFn(e.target.value)}
-            />
-          </div>
+    <div className={dark ? "home" : "home home_light"}>
+      <div className='header'>
+        <h1 className={dark ? "logo" : "logo logo_light"}>devfinder</h1>
+        <div
+          className={
+            dark ? "dark_light_mode" : "dark_light_mode dark_light_mode_light"
+          }
+          onClick={changeLightMode}>
+          <p>{!dark ? "DARK" : "LIGHT"}</p>
+          <img src={!dark ? moon : sun} alt='' />
         </div>
-      </form>
-      {loading && (
+      </div>
+      <div
+        className={
+          dark
+            ? "search-input-cont"
+            : "search-input-cont search-input-cont_light"
+        }>
+        <img src={searchIcon} alt='search' className='search_icon' />
+        <input
+          type='search'
+          placeholder='Search GitHub username…'
+          onChange={(e) => onChangeHandler(e.target.value)}
+        />
+        <p className='error'> {!userExists && "No results"}</p>
+        <span className='search_btn' onClick={serachHandler}>
+          Search
+        </span>
+      </div>
+      {/* {loading && (
         <p className='loading'>
           <span></span>
         </p>
-      )}
+      )} */}
       <div className='user-container'>
-        <p className='user-error'>
-          {!userExists && "User you are looking for, doesn't exists"}
-        </p>
-        {users &&
-          userExists &&
-          users.map((user) => {
-            return (
-              <UserCard
-                key={user.id}
-                name={user.login}
-                img={user.avatar_url}
-                github={user.html_url}
-              />
-            );
-          })}
+        {Object.keys(user).length > 0 && (
+          <UserCard key={user.id} user={user} dark={dark} />
+        )}
       </div>
     </div>
   );

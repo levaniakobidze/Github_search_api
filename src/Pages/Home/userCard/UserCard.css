@@ -1,119 +1,257 @@
-.user-card {
-  display: inline-block;
-  width: 230px !important;
-  height: 280px !important;
-  background-color: #fff;
-  border-radius: 20px;
-  text-decoration: none;
-  box-shadow: 3px 3px 5px 1px rgb(185 184 218);
-
-  transition: all 0.2s;
-  z-index: 999;
-  margin: 20px 40px;
-  transition: all 0.5s;
-}
-
-.user-card:hover {
-  box-shadow: 5px 5px 5px 1px rgb(185 184 218);
-}
-.user-img {
-  width: 100%;
+.user_card {
+  width: 730px;
+  min-height: 444px;
+  background-color: hsl(222, 41%, 20%);
+  border-radius: 15px;
+  padding: 48px;
   display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 10px 0;
-  border-radius: 20px 20px 0 0;
-  height: 130px;
-  background-color: rgb(117 93 191);
-  position: relative;
-  border: 3px solid #fff;
-}
-.user-img img {
-  width: 150px;
-  height: 150px;
-  border-radius: 50%;
-  position: absolute;
-  top: 30%;
-  border: 5px solid #fff;
-}
-.user-name {
-  color: rgb(117 93 191);
-  justify-content: center;
-  font-weight: bold;
-  margin-top: 77px;
-  font-size: 22px;
-  display: flex;
-}
-
-.table {
-  display: flex;
-  width: 100%;
+  flex-wrap: wrap;
   justify-content: space-between;
-  margin-top: 25px;
-  border-top: 1px solid rgb(171, 155, 219);
-  padding: 0 10px;
 }
-.followers {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  border-right: 1px solid rgb(171, 155, 219);
-  padding: 5px 10px;
-  color: rgb(171, 155, 219);
+.user_card_light {
+  background: #fefefe !important;
+  box-shadow: 0px 16px 30px -10px rgba(70, 96, 187, 0.198567) !important;
+  border-radius: 15px !important;
 }
-.following {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  border-right: 1px solid rgb(171, 155, 219);
-  padding: 5px 7px;
-  color: rgb(171, 155, 219);
+.user_img_cont {
+  width: 117px;
+  height: 117px;
 }
-.location {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding: 5px 10px;
-  color: rgb(171, 155, 219);
+
+.img_link {
+  height: auto;
+  height: 117px;
 }
-.numbers {
-  margin: 5px 0;
-  color: black;
-}
-.details-button-div {
+.user_img_cont img {
   width: 100%;
+  height: 100%;
+  border-radius: 50%;
+}
+.info_cont {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 78%;
 }
-button {
-  background-color: rgb(117 93 191);
-  margin: 0 auto;
-  color: #ffff;
-  border: 0;
-  outline: 0;
-  width: 120px;
-  height: 30px;
-  margin-top: 10px;
-  cursor: pointer;
+.name_date {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.user_name {
+  font-family: "Space Mono";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 26px;
+  line-height: 39px;
+  /* identical to box height */
+  color: #ffffff;
+}
+.user_name_light {
+  color: #2b3442 !important;
+}
+.date {
+  font-family: "Space Mono";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 22px;
+  text-align: right;
+  color: #ffffff;
+}
+.date_light {
+  color: #697c9a !important;
+}
+.nick {
+  font-family: "Space Mono";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  /* identical to box height */
+  color: #0079ff;
+}
+.bio {
+  font-family: "Space Mono";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 25px;
+  /* identical to box height, or 167% */
+  color: #ffffff;
+  mix-blend-mode: normal;
+  opacity: 0.75;
+}
+.bio_light {
+  color: #4b6a9b !important;
+}
+.repo_info {
+  width: 100%;
+  height: 85px;
+  background: #141d2f;
+  border-radius: 10px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+.repo_info_light {
+  background: #f6f8ff !important;
+}
+.repos p,
+.followers p,
+.following p {
+  font-family: "Space Mono";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 19px;
+  color: #ffffff;
+}
+.repos_light p,
+.followers_light p,
+.following_light p {
+  color: #4b6a9b !important;
+}
+.repos span,
+.followers span,
+.following span {
+  font-family: "Space Mono";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 22px;
+  line-height: 33px;
+  /* identical to box height */
+  text-transform: uppercase;
+  color: #ffffff;
+}
+.repos_light span,
+.followers_light span,
+.following_light span {
+  color: #2b3442 !important;
+}
+.additional_infos {
+  width: 100%;
+  /* display: grid; */
+  /* grid-template-columns: repeat(2); */
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+.info {
+  margin-top: 15px;
+  width: 10%;
+  display: flex;
+  width: 100%;
+  padding-right: 10px;
 }
 
-a {
-  text-decoration: none;
+.info img {
+  margin-right: 10px;
+}
+.info p,
+.info a {
+  font-family: "Space Mono";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 22px;
+  color: #ffffff;
 }
 
-@media screen and (max-width: 639px) {
-  .user-img img {
-    width: 110px;
-    height: 110px;
-    top: 45%;
+.info_light p,
+.info_light a {
+  color: #4b6a9b !important;
+}
+
+@media screen and (max-width: 779px) {
+  .user_card {
+    width: 100%;
   }
 }
-@media screen and (max-width: 462px) {
-  .user-name {
-    font-size: 25px;
-    margin-top: 60px;
+
+@media screen and (max-width: 779px) {
+  .repo_info {
+    margin-top: 20px;
+  }
+  .additional_infos {
+    margin-top: 20px;
+  }
+  .user_card {
+    display: flex;
+    flex-direction: column;
+    align-items: top;
+    justify-content: top;
+    position: relative;
+  }
+  .info_cont {
+    margin-top: 100px;
+  }
+  .info_cont {
+    width: 100%;
+    margin: 0;
+  }
+  .name_date {
+    display: flex;
+    flex-direction: column;
+    align-items: right !important;
+    justify-content: right;
+  }
+  .user_name {
+    text-align: right;
+    width: 100%;
+  }
+  .user_img_cont {
+    width: 70px;
+    height: 70px;
+  }
+  .date {
+    width: 100%;
+  }
+  .img_link {
+    position: absolute;
+    top: 10%;
+  }
+
+  .nick {
+    text-align: right;
+  }
+}
+
+@media screen and (max-width: 503px) {
+  .user_name {
+    font-size: 16px !important;
+  }
+  .date {
+    font-size: 13px;
+  }
+}
+
+@media screen and (max-width: 417px) {
+  .info p,
+  .info a {
+    font-family: "Space Mono";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 22px;
+    color: #ffffff;
+  }
+}
+
+@media screen and (max-width: 371px) {
+  .user_name {
+    font-size: 14px !important;
+  }
+  .date {
+    font-size: 11px;
+  }
+  .info p,
+  .info a {
+    font-family: "Space Mono";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 10px;
+    line-height: 22px;
+    color: #ffffff;
   }
 }
