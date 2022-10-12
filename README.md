@@ -33,6 +33,9 @@ Users should be able to:
 
 ### What I learned
 
+- while working on this project I learned how to fetch data with api,
+- How to make a request on the server and also this was my first time experience - working on dark and light mode.
+
 ## Author
 
 - Website - [Portfolio](https://levaniakobidze.vercel.app/)
